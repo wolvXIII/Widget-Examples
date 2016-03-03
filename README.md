@@ -1,3 +1,3 @@
-# Widget-Examples
+# Widget-Snippets
 
-Easy to use snippet. Just copy/paste parts of the code to create your own pages!
+Easy to use snippets. Just copy/paste parts of the code to create your own pages!
