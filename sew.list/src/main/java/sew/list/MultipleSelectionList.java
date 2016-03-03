@@ -1,10 +1,7 @@
 /*
- * Java
- *
- * Copyright 2016 IS2T. All rights reserved.
- * IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Sébastien Eon 2016 / CC0-1.0
  */
-package ej.list;
+package sew.list;
 
 import ej.components.dependencyinjection.ServiceLoaderFactory;
 import ej.container.List;

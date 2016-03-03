@@ -1,10 +1,7 @@
 /*
- * Java
- *
- * Copyright 2015 IS2T. All rights reserved.
- * IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Sébastien Eon 2016 / CC0-1.0
  */
-package ej.list;
+package sew.list;
 
 import ej.components.dependencyinjection.ServiceLoaderFactory;
 import ej.container.List;
@@ -25,8 +22,10 @@ import ej.style.util.EditableStyle;
 import ej.widget.StyledDesktop;
 import ej.widget.StyledPanel;
 import ej.widget.basic.Label;
+import ej.widget.composed.Button;
+import ej.widget.listener.OnClickListener;
 
-public class ListWithSubItems {
+public class ListExtended {
 
 	private static final String ITEM = "Item";
 	private static final String SUB_ITEM = "SubItem";
@@ -97,17 +96,32 @@ public class ListWithSubItems {
 		for (int i = 0; ++i <= 20;) {
 			// Create the list items:
 			// - the main item,
-			Label item = new Label("Item " + i);
+			final String buttonText = "Item " + i;
+			final Button item = new Button("+ " + buttonText);
 			// - the sub item,
-			Label subItem = new Label("Sub " + i);
+			final Label subItem = new Label("Sub " + i);
 			subItem.addClassSelector(SUB_ITEM);
+			subItem.setVisible(false);
 			// - the item container (a list).
-			List itemComposite = new List(false);
+			final List itemComposite = new List(false);
 			itemComposite.addClassSelector(ITEM);
 			itemComposite.add(item);
 			itemComposite.add(subItem);
 			// Add it to the scroll list.
 			listComposite.add(itemComposite);
+			item.addOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick() {
+					if (subItem.isVisible()) {
+						item.setText("+ " + buttonText);
+						subItem.setVisible(false);
+					} else {
+						item.setText("-  " + buttonText);
+						subItem.setVisible(true);
+					}
+					itemComposite.revalidate();
+				}
+			});
 		}
 
 		// Create the scroll composite containing the list…
