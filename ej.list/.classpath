@@ -6,10 +6,6 @@
 	<classpathentry kind="var" path="EDC-1.2"/>
 	<classpathentry kind="var" path="MICROUI-2.0"/>
 	<classpathentry kind="var" path="MWT-2.1"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ej.components"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ej.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ej.motion"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ej.style"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ej.widget"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=ej.list&amp;ivyXmlPath=module.ivy&amp;confs=*"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

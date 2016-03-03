@@ -1,7 +1,7 @@
 /*
  * Java
  *
- * Copyright 2015 IS2T. All rights reserved.
+ * Copyright 2015-2016 IS2T. All rights reserved.
  * IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 package ej.list;
@@ -26,12 +26,11 @@ import ej.style.util.EditableStyle;
 import ej.widget.StyledDesktop;
 import ej.widget.StyledPanel;
 import ej.widget.basic.Label;
-import ej.widget.basic.Radio;
-import ej.widget.basic.Toggle;
-import ej.widget.basic.ToggleGroup;
 import ej.widget.composed.ToggleComposite;
+import ej.widget.toggle.RadioModel;
+import ej.widget.toggle.ToggleGroup;
 
-public class ListWithToggles {
+public class SingleSelectionList {
 
 	private static final String ITEM = "Item";
 	private static final String SUB_ITEM = "SubItem";
@@ -115,14 +114,14 @@ public class ListWithToggles {
 		ToggleGroup toggleGroup = new ToggleGroup();
 		for (int i = 0; ++i <= 10;) {
 			// Create the list items:
-			Toggle toggle = new Radio(false);
-			toggleGroup.addToggle(toggle);
+			RadioModel radioModel = new RadioModel();
+			toggleGroup.addToggle(radioModel);
+			ToggleComposite toggleButton = new ToggleComposite(radioModel);
 			// - the main item,
 			Label item = new Label("Item " + i);
 			// - the sub item,
 			Label subItem = new Label("Sub " + i);
 			subItem.addClassSelector(SUB_ITEM);
-			ToggleComposite toggleButton = new ToggleComposite(toggle);
 			// - the item container (a list).
 			List itemComposite = new List(false);
 			itemComposite.addClassSelector(ITEM);
