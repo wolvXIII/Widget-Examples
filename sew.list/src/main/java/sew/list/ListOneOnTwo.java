@@ -9,10 +9,10 @@ import ej.container.Scroll;
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.style.Stylesheet;
+import ej.style.background.NoBackground;
 import ej.style.background.PlainBackground;
 import ej.style.font.FontProfile;
 import ej.style.font.FontProfile.FontSize;
-import ej.style.outline.EmptyOutline;
 import ej.style.outline.SimpleOutline;
 import ej.style.selector.ClassSelector;
 import ej.style.selector.OddChildSelector;
@@ -38,15 +38,15 @@ public class ListOneOnTwo {
 
 		// Remove white background from all elements.
 		EditableStyle defaultStyle = new EditableStyle();
-		defaultStyle.setBorder(EmptyOutline.EMPTY_OUTLINE);
+		defaultStyle.setBackground(NoBackground.NO_BACKGROUND);
 		stylesheet.setDefaultStyle(defaultStyle);
 
 		// Add a white background to the panel.
 		// StyledPanel {
 		EditableStyle panelStyle = new EditableStyle();
-		// background-color: black;
-		PlainBackground panelBackground = new PlainBackground(Colors.WHITE);
-		panelStyle.setBorder(panelBackground);
+		// background-color: white;
+		panelStyle.setBackground(new PlainBackground());
+		panelStyle.setBackgroundColor(Colors.WHITE);
 		// }
 		stylesheet.addRule(new TypeSelector(StyledPanel.class), panelStyle);
 
@@ -67,8 +67,8 @@ public class ListOneOnTwo {
 		// .Item:nthchild(odd) {
 		EditableStyle oddItemStyle = new EditableStyle();
 		// background-color: 0xeee;
-		PlainBackground oddBorder = new PlainBackground(0xe0e0e0);
-		oddItemStyle.setBorder(oddBorder);
+		oddItemStyle.setBackground(new PlainBackground());
+		oddItemStyle.setBackgroundColor(0xe0e0e0);
 		// }
 		stylesheet.addRule(new AndCombinator(new ClassSelector(ITEM), new OddChildSelector()), oddItemStyle);
 
@@ -92,7 +92,8 @@ public class ListOneOnTwo {
 		}
 
 		// Create the scroll composite containing the list…
-		Scroll scrollComposite = new Scroll(false, listComposite, true);
+		Scroll scrollComposite = new Scroll(false, true);
+		scrollComposite.setWidget(listComposite);
 		// … and add it to the panel.
 		panel.setWidget(scrollComposite);
 

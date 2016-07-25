@@ -9,11 +9,11 @@ import ej.container.Scroll;
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.style.Stylesheet;
+import ej.style.background.NoBackground;
 import ej.style.background.PlainBackground;
 import ej.style.border.ComplexRectangularBorder;
 import ej.style.font.FontProfile;
 import ej.style.font.FontProfile.FontSize;
-import ej.style.outline.EmptyOutline;
 import ej.style.outline.SimpleOutline;
 import ej.style.selector.ClassSelector;
 import ej.style.selector.TypeSelector;
@@ -39,15 +39,15 @@ public class ListWithSubItems {
 
 		// Remove white background from all elements.
 		EditableStyle defaultStyle = new EditableStyle();
-		defaultStyle.setBorder(EmptyOutline.EMPTY_OUTLINE);
+		defaultStyle.setBackground(NoBackground.NO_BACKGROUND);
 		stylesheet.setDefaultStyle(defaultStyle);
 
 		// Add a white background to the panel.
 		// StyledPanel {
 		EditableStyle panelStyle = new EditableStyle();
-		// background-color: black;
-		PlainBackground panelBackground = new PlainBackground(Colors.WHITE);
-		panelStyle.setBorder(panelBackground);
+		// background-color: white;
+		panelStyle.setBackground(new PlainBackground());
+		panelStyle.setBackgroundColor(Colors.WHITE);
 		// }
 		stylesheet.addRule(new TypeSelector(StyledPanel.class), panelStyle);
 
@@ -59,10 +59,9 @@ public class ListWithSubItems {
 		itemFontProfile.setSize(FontSize.MEDIUM);
 		itemStyle.setFontProfile(itemFontProfile);
 		// border-bottom: 1px solid gray;
-		ComplexRectangularBorder itemBorder = new ComplexRectangularBorder();
-		itemBorder.setBottom(1);
-		itemBorder.setColorBottom(Colors.GRAY);
+		ComplexRectangularBorder itemBorder = new ComplexRectangularBorder(0, 0, 1, 0);
 		itemStyle.setBorder(itemBorder);
+		itemStyle.setBorderColor(Colors.GRAY);
 		// padding: 6px;
 		SimpleOutline itemPadding = new SimpleOutline(6);
 		itemStyle.setPadding(itemPadding);
@@ -108,7 +107,8 @@ public class ListWithSubItems {
 		}
 
 		// Create the scroll composite containing the list…
-		Scroll scrollComposite = new Scroll(false, listComposite, true);
+		Scroll scrollComposite = new Scroll(false, true);
+		scrollComposite.setWidget(listComposite);
 		// … and add it to the panel.
 		panel.setWidget(scrollComposite);
 

@@ -10,11 +10,11 @@ import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.style.State;
 import ej.style.Stylesheet;
+import ej.style.background.NoBackground;
 import ej.style.background.PlainBackground;
 import ej.style.border.ComplexRectangularBorder;
 import ej.style.font.FontProfile;
 import ej.style.font.FontProfile.FontSize;
-import ej.style.outline.EmptyOutline;
 import ej.style.outline.SimpleOutline;
 import ej.style.selector.ClassSelector;
 import ej.style.selector.StateSelector;
@@ -23,7 +23,7 @@ import ej.style.util.EditableStyle;
 import ej.widget.StyledDesktop;
 import ej.widget.StyledPanel;
 import ej.widget.basic.Label;
-import ej.widget.composed.ToggleComposite;
+import ej.widget.composed.ToggleWrapper;
 
 public class MultipleSelectionList {
 
@@ -41,15 +41,15 @@ public class MultipleSelectionList {
 
 		// Remove white background from all elements.
 		EditableStyle defaultStyle = new EditableStyle();
-		defaultStyle.setBorder(EmptyOutline.EMPTY_OUTLINE);
+		defaultStyle.setBackground(NoBackground.NO_BACKGROUND);
 		stylesheet.setDefaultStyle(defaultStyle);
 
 		// Add a white background to the panel.
 		// StyledPanel {
 		EditableStyle panelStyle = new EditableStyle();
-		// background-color: black;
-		PlainBackground panelBackground = new PlainBackground(Colors.WHITE);
-		panelStyle.setBorder(panelBackground);
+		// background-color: white;
+		panelStyle.setBackground(new PlainBackground());
+		panelStyle.setBackgroundColor(Colors.WHITE);
 		// }
 		stylesheet.addRule(new TypeSelector(StyledPanel.class), panelStyle);
 
@@ -59,8 +59,8 @@ public class MultipleSelectionList {
 		// color: white;
 		checkedStyle.setForegroundColor(Colors.WHITE);
 		// background-color: silver;
-		PlainBackground checkedBackground = new PlainBackground(Colors.SILVER);
-		checkedStyle.setBorder(checkedBackground);
+		checkedStyle.setBackground(new PlainBackground());
+		checkedStyle.setBackgroundColor(Colors.SILVER);
 		// }
 		stylesheet.addRule(new StateSelector(State.Checked), checkedStyle);
 
@@ -74,10 +74,9 @@ public class MultipleSelectionList {
 		itemFontProfile.setSize(FontSize.MEDIUM);
 		itemStyle.setFontProfile(itemFontProfile);
 		// border-bottom: 1px solid gray;
-		ComplexRectangularBorder itemBorder = new ComplexRectangularBorder();
-		itemBorder.setBottom(1);
-		itemBorder.setColorBottom(Colors.GRAY);
+		ComplexRectangularBorder itemBorder = new ComplexRectangularBorder(0, 0, 1, 0);
 		itemStyle.setBorder(itemBorder);
+		itemStyle.setBorderColor(Colors.GRAY);
 		// padding: 6px;
 		SimpleOutline itemPadding = new SimpleOutline(6);
 		itemStyle.setPadding(itemPadding);
@@ -108,7 +107,7 @@ public class MultipleSelectionList {
 
 		for (int i = 0; ++i <= 10;) {
 			// Create the list items:
-			ToggleComposite toggleButton = new ToggleComposite();
+			ToggleWrapper toggleButton = new ToggleWrapper();
 			// - the main item,
 			Label item = new Label("Item " + i);
 			// - the sub item,
@@ -125,7 +124,8 @@ public class MultipleSelectionList {
 		}
 
 		// Create the scroll composite containing the list…
-		Scroll scrollComposite = new Scroll(false, listComposite, true);
+		Scroll scrollComposite = new Scroll(false, true);
+		scrollComposite.setWidget(listComposite);
 		// … and add it to the panel.
 		panel.setWidget(scrollComposite);
 		// panel.setWidget(listComposite);
